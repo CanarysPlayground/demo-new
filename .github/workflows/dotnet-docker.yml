@@ -42,8 +42,8 @@ jobs:
           file: ./Tailspin.SpaceGame.Web/Dockerfile
           push: true
           tags: |
-            ghcr.io/gitHub-galaxy-demo/spacegameweb:latest
-            ghcr.io/gitHub-galaxy-demo/spacegameweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ghcr.io/github-galaxy-demo/spacegameweb:latest
+            ghcr.io/github-galaxy-demo/spacegameweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
           
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -64,7 +64,7 @@ jobs:
       - name: Anchor Scan Web image
         uses: anchore/scan-action@main
         with:
-          image: "ghcr.io/canarysplayground/spacegameweb:latest"
+          image: "ghcr.io/github-galaxy-demo/spacegameweb:latest"
           acs-report-enable: true
           fail-build: true
           severity-cutoff: critical
