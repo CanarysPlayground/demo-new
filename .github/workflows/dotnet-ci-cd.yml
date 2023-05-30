@@ -53,10 +53,10 @@ jobs:
      needs: [build_web_app]
     
     deploytodev:
-      name: 🚀 Deploy
+      name: Deploy to Dev
       runs-on: ubuntu-latest
       environment: Development
-      needs: [dependency-review,build_web_app,code-ql-check]
+      needs: [build_web_app,code-ql-check]
 
       steps:
         - name: Download artifact from build job
@@ -72,10 +72,10 @@ jobs:
             publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
     
     deploytoprod:
-      name: 🚀 Deploy
+      name: Deploy To Production
       runs-on: ubuntu-latest
       environment: Production
-      needs: [dependency-review,build_web_app,code-ql-check]
+      needs: [deploytodev]
 
       steps:
         - name: Download artifact from build job
