@@ -37,7 +37,7 @@ jobs:
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4.0.0
         with:
           context: .
           file: ./Tailspin.SpaceGame.Web/Dockerfile
@@ -80,7 +80,7 @@ jobs:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
     needs: [dockerpush, anchore]
-    environment: Development
+    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v2
