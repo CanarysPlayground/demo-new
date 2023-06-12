@@ -67,7 +67,7 @@ jobs:
         - name: Azure WebApp
           uses: Azure/webapps-deploy@v2
           with:
-            app-name: tailspingalaxydemo
+            app-name: tailspindemo
             package: . 
             publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
     
@@ -79,7 +79,7 @@ jobs:
         - name: ZAP Scan
           uses: zaproxy/action-full-scan@v0.4.0
           with:
-            target: https://tailspingalaxydemo.azurewebsites.net
+            target: https://tailspindemo.azurewebsites.net
     
     deploytoprod:
       name: Deploy To Production
