@@ -9,4 +9,3 @@ The 🤖 Space Game 🚀 is a .NET Core application written in C# which stores i
 
 #### Technical Details
 
-changes were added
