@@ -109,22 +109,19 @@ if (typeof jQuery === 'undefined') {
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
     }
 
-    var $parent = selector ? $(selector) : $this.closest('.alert');
-
-    if (!$parent.length) {
-      console.error('No alert found to close');
-      return;
-    }
+    var $parent = $(selector === '' ? [] : selector).html();
 
     if (e) e.preventDefault()
 
-    var closeEvent = $.Event('close.bs.alert')
-    $parent.trigger(closeEvent)
+    if (!$parent.length) {
+      $parent = $this.closest('.alert')
+    }
 
-    if (closeEvent.isDefaultPrevented()) return
+    $parent.trigger(e = $.Event('close.bs.alert'))
+
+    if (e.isDefaultPrevented()) return
 
     $parent.removeClass('in')
-}
 
     function removeElement() {
       // detach from parent, fire event then clean up data
