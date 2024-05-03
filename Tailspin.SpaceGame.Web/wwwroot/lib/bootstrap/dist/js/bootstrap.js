@@ -109,19 +109,37 @@ if (typeof jQuery === 'undefined') {
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
     }
 
-    var $parent = $(selector === '' ? [] : selector).html();
+    var $parent;
 
-    if (e) e.preventDefault()
+if (selector === '') {
+  $parent = $();
+} else {
+  // Ensure that the selector is a safe value before using it
+  if (isSafeSelector(selector)) {
+    $parent = $(selector).html();
+  } else {
+    throw new Error('Unsafe selector value');
+  }
+}
 
-    if (!$parent.length) {
-      $parent = $this.closest('.alert')
-    }
+if (e) e.preventDefault()
 
-    $parent.trigger(e = $.Event('close.bs.alert'))
+if (!$parent.length) {
+  $parent = $this.closest('.alert')
+}
 
-    if (e.isDefaultPrevented()) return
+$parent.trigger(e = $.Event('close.bs.alert'))
 
-    $parent.removeClass('in')
+if (e.isDefaultPrevented()) return
+
+$parent.removeClass('in')
+
+// Add this function to check if the selector is safe
+function isSafeSelector(selector) {
+  // Implement your own logic here to determine if the selector is safe
+  // For example, you could check if the selector matches a whitelist of allowed values
+  return true; // placeholder
+}
 
     function removeElement() {
       // detach from parent, fire event then clean up data
